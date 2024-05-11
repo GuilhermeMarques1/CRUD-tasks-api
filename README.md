@@ -1,6 +1,6 @@
 # Requisitos Funcionais:
-  - [ ] Criar nova task
-  - [ ] Listar todas as tasks
+  - [x] Criar nova task
+  - [x] Listar todas as tasks
   - [ ] Atualizar task específica
   - [ ] Removar task
   - [ ] Marcar task como concluída
