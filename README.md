@@ -2,7 +2,7 @@
   - [x] Criar nova task
   - [x] Listar todas as tasks
   - [ ] Atualizar task específica
-  - [ ] Removar task
+  - [x] Removar task
   - [ ] Marcar task como concluída
   - [ ] Importar tasks por CSV
   - [ ] Filtrar tasks por nome e/ou descrição

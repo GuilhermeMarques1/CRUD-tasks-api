@@ -1,4 +1,5 @@
 import { Database } from "./services/db.js";
+import { buildRoutePath } from "./utils/build-route-path.js";
 import { randomUUID } from "node:crypto";
 
 const database = new Database();
@@ -6,7 +7,7 @@ const database = new Database();
 export const routes = [
   {
     method: "GET",
-    path: "/tasks",
+    path: buildRoutePath("/tasks"),
     handler: (req, res) => {
       const tasks = database.select("tasks");
 
@@ -16,7 +17,7 @@ export const routes = [
 
   {
     method: "POST",
-    path: "/tasks",
+    path: buildRoutePath("/tasks"),
     handler: (req, res) => {
       const { title, description } = req.body;
       
@@ -34,6 +35,26 @@ export const routes = [
       });
 
       return res.writeHead(201).end();
+    }
+  },
+
+  {
+    method: "DELETE",
+    path: buildRoutePath("/tasks/:id"),
+    handler: (req, res) => {
+      const id = req.params.id;
+
+      if(!id) {
+        return res.writeHead(400).end();
+      }
+
+      const deleted = database.delete("tasks", id);
+
+      if(deleted) {
+        return res.writeHead(200).end(`Task ${id} succesfuly deleted`);
+      }
+
+      return res.writeHead(404).end(`Task ${id} not found`);
     }
   }
 ]
