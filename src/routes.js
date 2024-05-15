@@ -48,8 +48,6 @@ export const routes = [
         return res.writeHead(400).end();
       }
 
-      console.log(req.body);
-
       const body = {...req.body};
 
       Object.keys(body).forEach((prop) => {

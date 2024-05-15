@@ -37,21 +37,24 @@ export class Database {
   update(table, id, data) {
     const rowIndex = this.#database[table].findIndex(row => row.id === id);
 
-    console.log(this.#database[table][rowIndex]);
-    // if(rowIndex > -1) {
-    //   const updated = Object.create(this.#database[table][rowIndex]);
-    //   Object.keys(updated).forEach(prop => {
-    //     if(prop !== "id" && data[prop]) {
-    //       updated[prop] = data[prop]
-    //     }
-    //   });
+    if(rowIndex > -1) {
+      const updatedRow = Object.entries(this.#database[table][rowIndex])
+        .reduce((updatedObj, [key, value]) => {
+          if(data[key]) {
+            updatedObj[key] = data[key];
+            return updatedObj;
+          } else {
+            updatedObj[key] = value;
+            return updatedObj;
+          }
+        }, {})
 
-    //   this.#database[table][rowIndex] = updated;
-    //   this.#persist();
-    //   return true;
-    // }
+      this.#database[table][rowIndex] = updatedRow
+      this.#persist();
+      return true;
+    }
 
-    // return false;
+    return false;
   }
 
   delete(table, id) {
