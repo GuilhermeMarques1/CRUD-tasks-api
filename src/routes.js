@@ -32,6 +32,7 @@ export const routes = [
         created_at: new Date().toString(),
         completed_at: null,
         updated_at: null,
+        completed: false,
       });
 
       return res.writeHead(201).end();
