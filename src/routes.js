@@ -39,6 +39,42 @@ export const routes = [
   },
 
   {
+    method: "PUT",
+    path: buildRoutePath("/tasks/:id"),
+    handler: (req, res) => {
+      const id = req.params.id;
+
+      if(!id) {
+        return res.writeHead(400).end();
+      }
+
+      console.log(req.body);
+
+      const body = {...req.body};
+
+      Object.keys(body).forEach((prop) => {
+        if(prop !== "title" && prop !== "description") {
+          return res.writeHead(400).end(`Property ${prop} is not known`);
+        }
+      })
+
+      if(!body.hasOwnProperty("title") && !body.hasOwnProperty("description")) {
+        return res.writeHead(400).end();
+      }
+
+      body.updated_at = new Date().toString();
+
+      const updated = database.update("tasks", id, body);
+
+      if(updated) {
+        return res.writeHead(200).end(`Task ${id} succesfuly updated`);
+      }
+
+      return res.writeHead(404).end(`Task ${id} not  found`);
+    }
+  },
+
+  {
     method: "DELETE",
     path: buildRoutePath("/tasks/:id"),
     handler: (req, res) => {
