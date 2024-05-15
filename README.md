@@ -1,7 +1,7 @@
 # Requisitos Funcionais:
   - [x] Criar nova task
   - [x] Listar todas as tasks
-  - [ ] Atualizar task específica
+  - [x] Atualizar task específica
   - [x] Removar task
   - [ ] Marcar task como concluída
   - [ ] Importar tasks por CSV
@@ -9,8 +9,8 @@
 
 
 # Regras de Negócio:
-  - [ ] As tasks devem ter titulo e descrição
+  - [x] As tasks devem ter titulo e descrição
   - [ ] Deve salvar a data de quando a task foi concluída
-  - [ ] Deve salvar a data em que foi criada
-  - [ ] Deve salvar a data da última alteração da task
+  - [x] Deve salvar a data em que foi criada
+  - [x] Deve salvar a data da última alteração da task
   - [ ] Deve ser possível filtrar tasks por nome e descrição
