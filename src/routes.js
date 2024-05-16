@@ -112,7 +112,8 @@ export const routes = [
         }
   
         const updated = database.update("tasks", id, {
-          completed: !task["completed"]
+          completed: !task["completed"],
+          completed_at: !task["completed"] ? new Date().toString() : null,
         });
   
         if(updated) {
