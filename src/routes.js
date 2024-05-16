@@ -11,6 +11,21 @@ export const routes = [
     handler: (req, res) => {
       try {
         const tasks = database.select("tasks");
+        const { title, description } = req.query;
+
+        if(title || description) {
+          const filteredTasks = tasks.reduce((filter, task) => {
+            if(task.title.toLowerCase().includes(title) || 
+              task.description.toLowerCase().includes(description)
+            ) {
+              filter.push(task)
+              return filter;
+            }
+            return filter;
+          }, [])
+          
+          return res.writeHead(200).end(JSON.stringify(filteredTasks));
+        }
   
         return res.writeHead(200).end(JSON.stringify(tasks));
       } catch (error) {
