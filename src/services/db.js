@@ -34,13 +34,23 @@ export class Database {
     return data;
   }
 
+  getById(table, id) {
+    const rowIndex = this.#database[table].findIndex(row => row.id === id);
+
+    if(rowIndex > -1) {
+      return this.#database[table][rowIndex];
+    }
+
+    return false;
+  }
+
   update(table, id, data) {
     const rowIndex = this.#database[table].findIndex(row => row.id === id);
 
     if(rowIndex > -1) {
       const updatedRow = Object.entries(this.#database[table][rowIndex])
         .reduce((updatedObj, [key, value]) => {
-          if(data[key]) {
+          if(data[key] !== undefined) {
             updatedObj[key] = data[key];
             return updatedObj;
           } else {
